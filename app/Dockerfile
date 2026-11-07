@@ -1,18 +1,21 @@
-# Imagen base oficial y versión fija
+# Dockerfile para la aplicación FastAPI
+# Construye la imagen de la aplicación FastAPI con sus dependencias
+# Utiliza la imagen base de Python 3.11 slim
+# Establece el directorio de trabajo en /app
+# Copia las dependencias e instálalas
+# Copia el código fuente
+# Expone el puerto 5000
+# Comando de inicio
+
 FROM python:3.11-slim
 
-# Directorio de trabajo
 WORKDIR /app
 
-# Copiar dependencias e instalarlas
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar el código fuente
 COPY . .
 
-# Exponer el puerto
-EXPOSE 8000
+EXPOSE 5000
 
-# Comando de inicio
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
